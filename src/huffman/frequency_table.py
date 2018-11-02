@@ -29,3 +29,7 @@ class FrequencyTableBuilder(object):
     @staticmethod
     def build_from_arr(arr):
         res = FrequencyTable([0] * 257)
+        for u in arr:
+            res.increase(u)
+        res.increase(256)
+        return res

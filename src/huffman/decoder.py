@@ -1,5 +1,6 @@
 from huffman import code_tree
 import sys
+import numpy as np
 
 class Decoder(object):
     def __init__(self, code_tree):
@@ -17,7 +18,7 @@ class Decoder(object):
                 node = node.right
         raise Exception("Not in code tree")
 
-    def decode(self, input, output):
+    def decode_to_output(self, input, output):
         cnt = 0
         while True:
             foo = self.next_symbol(input)
@@ -27,3 +28,17 @@ class Decoder(object):
             if cnt % 1000000 == 0:
                 sys.stderr.write(str(cnt) + "\n")
             output.write(bytes((foo,)))
+
+    def decode_to_arr(self, input):
+        res = []
+        cnt = 0
+        while True:
+            foo = self.next_symbol(input)
+            if foo == 256:
+                break
+            cnt += 1
+            if cnt % 1000000 == 0:
+                sys.stderr.write(str(cnt) + "\n")
+            res.append(foo)
+        arr = np.array(res)
+        return arr

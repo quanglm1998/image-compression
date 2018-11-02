@@ -9,19 +9,13 @@ class Compressor(object):
         eval = evaluator.Evaluator()
 
         # read image part
-        # img = cv2.imread(args.input, args.color)
-        # eval.original = img.size
-
-        # a = np.array([[[1,2], [3,4]], [[5, 6], [7, 8]]])
-        # b = a.ravel()
-        # b = b.reshape((2, 2, 2))
-        # print(b)
+        img = cv2.imread(args.input, args.color)
 
         # TODO: add more stuff
 
         # Huffman code part
         c = cp.Compressor()
-        c.compress(args.input, args.output)
-        eval.original = os.path.getsize(args.input)
+        c.compress(img=img, input=None, output=args.output)
+        eval.original = img.size
         eval.encoded = os.path.getsize(args.output)
         eval.show_ratio()
